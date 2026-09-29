@@ -1,0 +1,16 @@
+[
+  {
+    "incident_id": "INC-1001",
+    "service": "payment-gateway",
+    "error_log": "ConnectionPool timeout while reaching redis-cluster:6379 after 5000ms",
+    "root_cause": "Redis memory exhaustion due to unexpired session keys during peak traffic spikes.",
+    "resolution": "Flushed expired volatile keys using redis-cli --eval, increased maxmemory-policy to volatile-lru, and scaled up the replication node tier."
+  },
+  {
+    "incident_id": "INC-1042",
+    "service": "auth-service",
+    "error_log": "JWT SignatureVerificationError: Token expired mismatch by 120s on node auth-pod-7",
+    "root_cause": "Clock drift between Kubernetes worker nodes due to an out-of-sync NTP daemon on pool B.",
+    "resolution": "Restarted chronyd service across all worker nodes in pool B and verified NTP synchronization via chronyc sources."
+  }
+]
